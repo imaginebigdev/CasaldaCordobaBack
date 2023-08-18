@@ -4,7 +4,6 @@ import cors from "cors";
 import { sequelize } from "./config/database";
 import productRoutes from "./routes/productRoutes";
 import categoryRoutes from "./routes/categoryRoutes";
-import orderRoutes from "./routes/orderRoutes";
 import morgan = require("morgan");
 
 dotenv.config();
@@ -17,9 +16,8 @@ app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
 
-app.use("/products", productRoutes);
+app.use("/properties", productRoutes);
 app.use("/categories", categoryRoutes);
-app.use("/orders", orderRoutes);
 
 (async () => {
   try {
@@ -27,7 +25,7 @@ app.use("/orders", orderRoutes);
     console.log("Conexión a la base de datos establecida correctamente.");
 
     // poner en "force: false" en caso de no querer eliminar todos los datos cargados cada vez que se actualiza
-    await sequelize.sync({ force: true, logging: false });
+    await sequelize.sync({ force: false, logging: false });
     app.listen(PORT, () => {
       console.log(`Servidor corriendo en el puerto ${PORT} en modo ${env}`);
     });

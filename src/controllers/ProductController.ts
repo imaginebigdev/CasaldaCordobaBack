@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { ProductModel } from "../models/ProductModel";
-import { OrderModel } from "../models/OrderModel";
+const key_admin_back = process.env.KEY_ADMIN;
 
 export const getProducts = async (
   _req: Request,
@@ -20,17 +20,49 @@ export const postProduct = async (
   res: Response
 ): Promise<void> => {
   try {
-    const { name, description, image, price, stock, categoryId } = req.body;
+    const {
+      name,
+      description,
+      image,
+      price,
+      categoryId,
+      type,
+      province,
+      location,
+      ubication,
+      environments,
+      bathrooms,
+      antiquity,
+      status,
+      yard,
+      gas,
+      image_galery,
+      key_admin,
+    } = req.body;
+    console.log(req.body);
+
+    if (key_admin !== key_admin_back)
+      throw new Error("Error en las credenciales");
 
     await ProductModel.create({
       name,
       description,
       image,
       price,
-      stock,
+      type,
+      province,
+      location,
+      ubication,
+      environments,
+      bathrooms,
+      antiquity,
+      status,
+      yard,
+      gas,
+      image_galery,
       categoryId,
     });
-    res.status(201).send("Producto creado correctamente");
+    res.status(201).send("Propiedad creada correctamente");
   } catch (error) {
     const errorMessage = (error as Error).message;
     res.status(500).json({ error: errorMessage });
@@ -57,19 +89,36 @@ export const modifyProduct = async (
 ): Promise<void> => {
   try {
     const { id } = req.params;
-    const { name, price, description, image, stock } = req.body;
+    const {
+      name,
+      description,
+      image,
+      price,
+      environments,
+      bathrooms,
+      antiquity,
+      status,
+      image_galery,
+      key_admin,
+    } = req.body;
+    if (key_admin !== key_admin_back)
+      throw new Error("Error en las credenciales");
 
     const product = await ProductModel.findByPk(id);
-    if (!product) throw new Error("Producto no encontrado");
+    if (!product) throw new Error("Propiedad no encontrada");
     const modifyProduct = await product.update({
       name,
       price,
       description,
       image,
-      stock,
+      environments,
+      bathrooms,
+      antiquity,
+      status,
+      image_galery,
     });
 
-    res.json({ message: "Producto modificado", modifyProduct });
+    res.json({ message: "Propiedad modificada ", modifyProduct });
   } catch (error) {
     const errorMessage = (error as Error).message;
     res.status(500).json({ error: errorMessage });
@@ -82,10 +131,14 @@ export const deleteProduct = async (
 ): Promise<void> => {
   try {
     const { id } = req.params;
+    const { key_admin } = req.body;
+    if (key_admin !== key_admin_back)
+      throw new Error("Error en las credenciales");
+
     const product = await ProductModel.findByPk(id);
-    if (!product) throw new Error("Producto no encontrado");
+    if (!product) throw new Error("Propiedad no encontrada");
     await product.destroy();
-    res.status(200).send("Producto borrado existosamente");
+    res.status(200).send("Propiedad borrada existosamente");
   } catch (error) {
     const errorMessage = (error as Error).message;
     res.status(500).json({ error: errorMessage });

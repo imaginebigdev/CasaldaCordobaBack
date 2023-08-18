@@ -13,7 +13,20 @@ export class ProductModel extends Model {
   public description!: string;
   public image!: string;
   public price!: number;
-  public stock!: number;
+  // public stock!: number;
+
+  // Casandra inmobiliaria
+  public image_galery!: string[];
+  public type!: string;
+  public province!: string;
+  public location!: string;
+  public ubication!: string;
+  public environments!: number;
+  public bathrooms!: number;
+  public antiquity!: string;
+  public status!: string;
+  public yard!: boolean;
+  public gas!: boolean;
 }
 
 ProductModel.init(
@@ -40,8 +53,55 @@ ProductModel.init(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    stock: {
+    // stock: {
+    //   type: DataTypes.INTEGER,
+    //   allowNull: true,
+    // },
+
+    // Casalda Inmobiliaria
+    type: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    province: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    location: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    ubication: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    environments: {
       type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    bathrooms: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    antiquity: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    status: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    yard: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
+    gas: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
+    image_galery: {
+      type: DataTypes.ARRAY(DataTypes.STRING),
+      defaultValue: [],
       allowNull: true,
     },
   },

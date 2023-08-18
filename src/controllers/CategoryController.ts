@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { CategoryModel } from "../models/CategoryModel";
+const key_admin_back = process.env.KEY_ADMIN;
 
 export const getCategories = async (
   _req: Request,
@@ -19,7 +20,9 @@ export const postCategory = async (
   res: Response
 ): Promise<void> => {
   try {
-    const { name } = req.body;
+    const { name, key_admin } = req.body;
+    if (key_admin !== key_admin_back)
+      throw new Error("Error en las credenciales");
 
     await CategoryModel.create({ name: name });
     res.status(201).send("Categoria creada correctamente");
@@ -36,6 +39,8 @@ export const getCategoriesById = async (
   try {
     const { id } = req.params;
     const category = await CategoryModel.findByPk(id);
+
+    if (!category) throw new Error("Categoria no encontrada");
     res.json(category);
   } catch (error) {
     const errorMessage = (error as Error).message;
@@ -48,7 +53,9 @@ export const deleteCategory = async (
   res: Response
 ): Promise<void> => {
   try {
-    const { id } = req.params;
+    const { id, key_admin } = req.params;
+    if (key_admin !== key_admin_back)
+      throw new Error("Error en las credenciales");
     const category = await CategoryModel.findByPk(id);
     if (!category) throw new Error("Categoria no encontrada");
     await category.destroy();
