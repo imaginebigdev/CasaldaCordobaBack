@@ -1,0 +1,12 @@
+# Archivos generados por Node.js
+node_modules/
+dist/
+
+# Archivo de bloqueo npm
+package-lock.json
+
+# Archivos de configuración de entorno local
+.env
+.env.dev
+.env.test
+.env.prod
