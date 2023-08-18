@@ -1,4 +1,4 @@
-# Casandra inmobiliaria Back
+# Casalda inmobiliaria Back
 
 Backend de inmobiliaria con base de datos relacional.
 
