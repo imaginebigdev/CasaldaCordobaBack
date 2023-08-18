@@ -1,6 +1,6 @@
-# Template Relational Back-end
+# Casalda inmobiliaria Back
 
-Plantilla de ecommerce con base de datos relacional.
+Backend de inmobiliaria con base de datos relacional.
 
 ## Requisitos previos
 
@@ -28,6 +28,7 @@ NODE_ENV=development
 DB_USERNAME=tu_usuario_dev
 DB_PASSWORD=tu_contraseña_dev
 DB_NAME=nombre_de_la_db_dev
+KEY_ADMIN=nombre_de_key_front
 ```
 
 5. Crea la base de datos:
@@ -48,77 +49,135 @@ Para usar el proyecto hay 3 rutas distintas, todas con su respectivo CRUD
 
 ## Products
 
-- http://localhost:4001/products `GET` (Trae todos los productos, en caso de no haber nada en la DB trae un array vacio)
+- http://localhost:4001/properties `GET` (Trae todos los productos, en caso de no haber nada en la DB trae un array vacio)
 
 ```
 [
   {
     "id": 1,
-    "name": "ProductoTest",
-    "description": "test",
-    "image": "test",
-    "price": 3000,
-    "stock": 4,
-    "createdAt": "2023-07-25T12:07:33.951Z",
-    "updatedAt": "2023-07-25T12:07:33.951Z",
-    "categoryId": 1
+    "name": "prop 1",
+    "description": "descripcion",
+    "image": "imagen_url",
+    "price": 0,
+    "type": "tipo_de_prop",
+    "province": "provincia",
+    "location": "ciudad/pueblo/localidad",
+    "ubication": "direccion",
+    "environments": 0,
+    "bathrooms": 0,
+    "antiquity": 0,
+    "status": "estado_prop",
+    "yard": true,
+    "gas": true,
+    "image_galery": [
+        "url1",
+        "url2"
+    ],
+    "createdAt": "2023-08-18T14:15:31.569Z",
+    "updatedAt": "2023-08-18T15:57:01.486Z",
+    "categoryId": 0
   },
   {
     "id": 2,
-    "name": "ProductoTest",
-    "description": "test 2",
-    "image": "test",
-    "price": 3000,
-    "stock": 4,
-    "createdAt": "2023-07-25T12:07:37.840Z",
-    "updatedAt": "2023-07-25T12:07:37.840Z",
-    "categoryId": 2
+    "name": "prop 2",
+    "description": "descripcion",
+    "image": "imagen_url",
+    "price": 0,
+    "type": "tipo_de_prop",
+    "province": "provincia",
+    "location": "ciudad/pueblo/localidad",
+    "ubication": "direccion",
+    "environments": 0,
+    "bathrooms": 0,
+    "antiquity": 0,
+    "status": "estado_prop",
+    "yard": true,
+    "gas": true,
+    "image_galery": [
+        "url1",
+        "url2"
+    ],
+    "createdAt": "2023-08-18T14:15:31.569Z",
+    "updatedAt": "2023-08-18T15:57:01.486Z",
+    "categoryId": 0
   }
 ]
 ```
 
-- http://localhost:4001/products/:id `GET` (Trae el producto que se especifica, en caso de no haber nada en la DB trae un array vacio)
+- http://localhost:4001/properties/:id `GET` (Trae el producto que se especifica, en caso de no haber nada en la DB trae un array vacio)
 
 ```
 {
-  "id": 1,
-  "name": "ProductoTest",
-  "description": "test",
-  "image": "test",
-  "price": 3000,
-  "stock": 4,
-  "createdAt": "2023-07-25T12:07:33.951Z",
-  "updatedAt": "2023-07-25T12:07:33.951Z",
-  "categoryId": 1
+    "id": 1,
+    "name": "prop 1",
+    "description": "descripcion",
+    "image": "imagen_url",
+    "price": 0,
+    "type": "tipo_de_prop",
+    "province": "provincia",
+    "location": "ciudad/pueblo/localidad",
+    "ubication": "direccion",
+    "environments": 0,
+    "bathrooms": 0,
+    "antiquity": 0,
+    "status": "estado_prop",
+    "yard": true,
+    "gas": true,
+    "image_galery": [
+        "url1",
+        "url2"
+    ],
+    "createdAt": "2023-08-18T14:15:31.569Z",
+    "updatedAt": "2023-08-18T15:57:01.486Z",
+    "categoryId": 0
 }
 ```
 
-- http://localhost:4001/products/ `POST` Se envia por body un objeto como el ejemplo de abajo, las propiedades marcadas con " \* " son de caracter obligatorio
+- http://localhost:4001/properties/ `POST` Se envia por body un objeto como el ejemplo de abajo, las propiedades marcadas con " \* " son de caracter obligatorio
 
 ```
 {
-   *  "name": "ProductoTest",
-      "description" : "test",
-      "image": "test",
-   *  "price": 3000,
-      "stock": 4,
-   *  "categoryId": 2
+   *  "name": "Prop test",
+      "description" : "prop_description",
+      "image": "url_imagen",
+   *  "price": 0,
+   *  "categoryId": 2,
+   *  "type": "tipo_prop",
+   *  "province": "provincia",
+   *  "location": "ciudad/pueblo/localidad",
+   *  "ubication": "dirección",
+   *  "environments": 0,
+   *  "bathrooms": 0,
+   *  "antiquity": 0,
+   *  "status": "estado_prop",
+   *  "yard": false || true,
+   *  "gas": false || true,
+      "image_galery": [
+        "url1",
+        "url2"
+      ],
+   *  "key_admin": "key_admin_front"
 }
 ```
 
-- http://localhost:4001/products/:id `PUT` Todos los datos especificados en el ejemplo de abajo pueden cambiarse, tambien la ruta reconoce si se tiene que cambiar un solo dato o todos.
+- http://localhost:4001/properties/:id `PUT` Todos los datos especificados en el ejemplo de abajo pueden cambiarse, tambien la ruta reconoce si se tiene que cambiar un solo dato o todos.
 
 ```
 {
-    "name": "nombre_modificado"
-    "price": 3000
-    "description": "descripcion_modificada"
-    "image": "imagen_modificada"
-    "stock": 3
+    "name": "nombre_a_cambiar",
+    "description": "descripcion_a_cambiar",
+    "image": "url_a_cambiar",
+    "price": 45000,
+    "environments": 2,
+    "bathrooms": 2,
+    "antiquity": 10,
+    "status": "estado_a_cambiar",
+    "image_galery": ["url_a_cambiar", "url_a_cambiar"],
+    "key_admin": "key_admin_front"
 }
 ```
 
-- http://localhost:4001/products/:id `DELETE` La ruta delete responde con un texto en caso de que haya encontrado el producto y se haya borrado, sino arroja error.
+- http://localhost:4001/properties/:id `DELETE` La ruta delete responde con un texto en caso de que haya encontrado el producto y se haya borrado, sino arroja error.
 
 #### Caso exitoso
 
@@ -187,120 +246,6 @@ Categoria borrada existosamente
 ```
 {
     "error": "Error al borrar la categoria"
-}
-```
-
-## Orders
-
-- http://localhost:4001/orders `GET` (Trae todas las ordenes, en caso de no haber nada en la DB trae un array vacio)
-
-```
-[
-  {
-    "id": 1,
-    "paymentId": "12312jn321-1232",
-    "products": [
-      {
-        "id": 1,
-        "name": "ProductoTest",
-      }
-    ],
-    "clientName": "Pepe",
-    "address": "direccion",
-    "province": "provincia",
-    "email": "pepe@mail.com",
-    "phone": "1234411",
-    "succesfull": true,
-    "pending": false,
-    "createdAt": "2023-07-25T12:11:29.816Z",
-    "updatedAt": "2023-07-25T12:13:15.705Z"
-  }
-]
-```
-
-- http://localhost:4001/orders/:id `GET` (Trae el producto que se especifica, en caso de no haber nada en la DB trae un array vacio)
-
-```
-{
-  "id": 1,
-  "paymentId": "12312jn321-1232",
-  "products": [
-    {
-      "id": 1,
-      "name": "ProductoTest",
-    }
-  ],
-  "clientName": "Pepe",
-  "address": "direccion",
-  "province": "provincia",
-  "email": "pepe@mail.com",
-  "phone": "1234411",
-  "succesfull": true,
-  "pending": false,
-  "createdAt": "2023-07-25T12:11:29.816Z",
-  "updatedAt": "2023-07-25T12:13:15.705Z"
-}
-```
-
-- http://localhost:4001/orders/ `POST` Se envia por body un objeto como el ejemplo de abajo, las propiedades marcadas con " \* " son de caracter obligatorio
-
-```
-{
-   *  "paymentId": "id_del_pago",
-   *  "products": [{
-          "id": 1,
-          "name": "ProductoCambiadoTest1"
-      }],
-   *  "clientName": "nombre_cliente",
-   *  "address": "direccion_cliente",
-   *  "province": "provincia_cliente",
-   *  "phone": 1234411,
-   *  "email": "email_cliente"
-}
-```
-
-- http://localhost:4001/orders/:id `PUT` Al modificar una orden lo que va a hacer es cambiar del estado "pending: true, succesfull: false" a "pending:false, succesfull: true" y arrojar un mensaje
-
-```
-{
-       "message": "Orden completada",
-       "modifyOrder": {
-        "id": 1,
-        "paymentId": "12312jn321-1232",
-        "products": [
-            {
-                "id": 1,
-                "name": "ProductoTest",
-            }
-        ],
-        "clientName": "Pepe",
-        "address": "direccion",
-        "province": "provincia",
-        "email": "pepe@mail.com",
-        "phone": "1234411",
-
-     *  "succesfull": true,
-     *  "pending": false,
-
-        "createdAt": "2023-07-25T12:11:29.816Z",
-        "updatedAt": "2023-07-25T12:13:15.705Z"
-    }
-}
-```
-
-- http://localhost:4001/orders/:id `DELETE` La ruta delete responde con un texto en caso de que haya encontrado la orden y se haya borrado, sino arroja error.
-
-#### Caso exitoso
-
-```
-Orden borrada existosamente
-```
-
-#### Caso error
-
-```
-{
-    "error": "Error al borrar la orden"
 }
 ```
 
