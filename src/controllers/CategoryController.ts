@@ -53,7 +53,8 @@ export const deleteCategory = async (
   res: Response
 ): Promise<void> => {
   try {
-    const { id, key_admin } = req.params;
+    const { id } = req.params;
+    const { key_admin } = req.body;
     if (key_admin !== key_admin_back)
       throw new Error("Error en las credenciales");
     const category = await CategoryModel.findByPk(id);
