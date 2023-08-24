@@ -36,6 +36,8 @@ export const postProduct = async (
       status,
       yard,
       gas,
+      cover_m2,
+      total_m2,
       image_galery,
       key_admin,
     } = req.body;
@@ -60,6 +62,8 @@ export const postProduct = async (
       yard,
       gas,
       image_galery,
+      cover_m2,
+      total_m2,
       categoryId,
     });
     res.status(201).send("Propiedad creada correctamente");
@@ -99,6 +103,7 @@ export const modifyProduct = async (
       antiquity,
       status,
       image_galery,
+      categoryId,
       key_admin,
     } = req.body;
     if (key_admin !== key_admin_back)
@@ -111,6 +116,7 @@ export const modifyProduct = async (
       price,
       description,
       image,
+      categoryId,
       environments,
       bathrooms,
       antiquity,

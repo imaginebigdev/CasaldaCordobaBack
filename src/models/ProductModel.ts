@@ -27,6 +27,8 @@ export class ProductModel extends Model {
   public status!: string;
   public yard!: boolean;
   public gas!: boolean;
+  public cover_m2!: number;
+  public total_m2!: number;
 }
 
 ProductModel.init(
@@ -58,7 +60,7 @@ ProductModel.init(
     //   allowNull: true,
     // },
 
-    // Casalda Inmobiliaria
+    // Canalda Inmobiliaria
     type: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -103,6 +105,14 @@ ProductModel.init(
       type: DataTypes.ARRAY(DataTypes.STRING),
       defaultValue: [],
       allowNull: true,
+    },
+    total_m2: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    cover_m2: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
     },
   },
   {
