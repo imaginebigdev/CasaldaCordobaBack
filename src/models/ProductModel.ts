@@ -1,6 +1,7 @@
 import { Model, DataTypes } from "sequelize";
 import { sequelize } from "../config/database";
 import { CategoryModel } from "./CategoryModel";
+import { ProductServices } from "../interfaces/ProductInterface";
 
 /**
  * @class Model
@@ -29,6 +30,9 @@ export class ProductModel extends Model {
   public gas!: boolean;
   public cover_m2!: number;
   public total_m2!: number;
+
+  public garage!: number;
+  public services!: ProductServices;
 }
 
 ProductModel.init(
@@ -105,6 +109,14 @@ ProductModel.init(
       type: DataTypes.ARRAY(DataTypes.STRING),
       defaultValue: [],
       allowNull: true,
+    },
+    garage: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    services: {
+      type: DataTypes.JSON,
+      allowNull: false,
     },
     total_m2: {
       type: DataTypes.INTEGER,
